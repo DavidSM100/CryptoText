@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	
+	<!--CSS-->
+	<link rel="stylesheet" href="assets/main.css">
+	
+</head>
+
+<body>
+
+	<h1 class="m orange">CryptoText</h1>
+	
+	<div class="m">
+		<span class="orange">Type of encryption</span>
+		<select id="cryptotype">
+			<option value="0">AES</option>
+			<option value="1">TripleDES</option>
+			<option value="2">DES</option>
+			<option value="3">RC4</option>
+		</select>
+	</div>
+	
+	<br>
+	
+	<div class="c">
+		<input type="password" id="password" placeholder="encryption key" oninput="keeppass()">
+		
+		<p class="invi">-</p>
+		
+		<button class="small" onclick="showpassword()"><span class="eye imgs icon"></span></button>
+		
+	</div>
+	
+	<br>
+	
+	<div class="c">
+	  
+		<button class="small" onclick="erase('text')"><b>×</b></button>
+		
+		<span class="invi">-</span>
+		
+		<textarea placeholder="text" id="text" rows="5"></textarea>
+		
+		<span class="invi">-</span>
+		
+		<button class="small" onclick="share(text)"><span class="share imgs icon"></span></button>
+		
+		<span class="invi">-</span>
+		
+		<button class="small" onclick="copy(text)"><span class="copy imgs icon "></span></button>
+
+	</div>
+	
+	<br>
+	
+	<div class="c">
+	  
+		<button class="small" onclick="erase('result')"><b>×</b></button>
+		
+		<span class="invi">-</span>
+		
+		<textarea placeholder="encrypted text" id="result" rows="5"></textarea>
+		
+		<span class="invi">-</span>
+		
+		<button class="small" onclick="share(result)"><span class="share imgs icon"></span></button>
+		
+		<span class="invi">-</span>
+		
+		<button class="small" onclick="copy(result)"><span class="copy imgs icon"></span></button>
+		
+	</div>
+	
+	
+	<p align="middle">
+		<button onclick="encrypt()">Encrypt/Decrypt</button>
+	</p>
+
+<!--App JS-->
+<script src="assets/main.js"></script>
+
+<!--Module that Encrypt/Decrypth-->
+<script src="assets/crypto-js.js"></script>
+
+	<!--JS to add back button when using with Delta-Shorcuts-->
+	<script src="/assets/ds.js"></script>
+
+</body>
+
+</html>
