@@ -1,3 +1,13 @@
+/* Alignment */
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.inline {
+  display: flex;
+}
+
 /* Theme */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -16,7 +26,7 @@ input, textarea {
 }
 
 button:hover, button:focus, button:active {
-	background-color: var(--btn-color, #ddd);
+  background-color: var(--btn-color, #ddd);
 }
 
 /* Basic */
@@ -40,9 +50,9 @@ textarea, input {
 }
 
 button {
-	width: 100%;
-	height: 3em;
-	margin: 15%;
+  width: 100%;
+  height: 3em;
+  margin: 15%;
 }
 
 /* Specific */
@@ -53,14 +63,4 @@ button {
 #encrypt {
   width: 70%;
   margin: 5%;
-}
-
-/* Alignment */
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.inline {
-  display: flex;
 }

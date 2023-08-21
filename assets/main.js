@@ -11,7 +11,7 @@ function encrypt() {
 
   if (passwordInput.value !== "" && text.value !== "" && result.value === "") {
 
-    var encryptedText = CryptoJS.AES.encrypt(text, password).toString();
+    var encryptedText = CryptoJS.AES.encrypt(text.value, passwordInput.value).toString();
 
     document.getElementById("result").value = encryptedText;
 
@@ -19,7 +19,7 @@ function encrypt() {
 
   if (passwordInput.value !== "" && text.value === "" && result.value !== "") {
 
-    var decryptedText = CryptoJS.AES.decrypt(result, password).toString(CryptoJS.enc.Utf8);
+    var decryptedText = CryptoJS.AES.decrypt(result.value, passwordInput.value).toString(CryptoJS.enc.Utf8);
 
     document.getElementById("text").value = decryptedText;
 
@@ -48,9 +48,11 @@ function showPassword() {
 }
 
 function keepPassword() {
-
-  localStorage.setItem("password", passwordInput.value);
-
+  if (passwordInput.value === "") {
+    localStorage.removeItem("password");
+  } else {
+    localStorage.setItem("password", passwordInput.value);
+  }
 }
 
 function share(data) {
