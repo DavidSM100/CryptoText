@@ -1,109 +1,77 @@
+const passwordInput = document.getElementById("password");
+
 //Load encryption key from localStorage
-var p = localStorage.getItem("password");
-if (p) {
-	document.getElementById("password").value = p;
-}
+var passwordData = localStorage.getItem("password");
 
-//Load type of encryption from localStorage
-var slls = localStorage.getItem('sl');
-if (slls) {
-	s.value = slls;
+if (passwordData) {
+  passwordInput.value = passwordData;
 }
-
 
 function encrypt() {
-	var text = document.getElementById("text").value;
-	var pw = document.getElementById("password").value;
-	var result = document.getElementById("result").value;
-	if (cryptotype.value === "0") {
-		if (text !== "" && pw !== "" && result === "") {
-			var encryptedText = CryptoJS.AES.encrypt(text, pw).toString();
-			document.getElementById("result").value = encryptedText;
-		}
-		if (text === "" && pw !== "" && result !== "") {
-			var decryptedText = CryptoJS.AES.decrypt(result, pw).toString(CryptoJS.enc.Utf8);
-			document.getElementById("text").value = decryptedText;
-		}
-	}
-	if (cryptotype.value === "1") {
-		if (text !== "" && pw !== "" && result === "") {
-			var encryptedText = CryptoJS.TripleDES.encrypt(text, pw).toString();
-			document.getElementById("result").value = encryptedText;
-		}
 
-		if (text === "" && pw !== "" && result !== "") {
-			var decryptedText = CryptoJS.TripleDES.decrypt(result, pw).toString(CryptoJS.enc.Utf8);
-			document.getElementById("text").value = decryptedText;
-		}
-	}
+  if (passwordInput.value !== "" && text.value !== "" && result.value === "") {
 
-	if (cryptotype.value === "2") {
-		if (text !== "" && pw !== "" && result === "") {
-			var encryptedText = CryptoJS.DES.encrypt(text, pw).toString();
-			document.getElementById("result").value = encryptedText;
-		}
+    var encryptedText = CryptoJS.AES.encrypt(text, password).toString();
 
-		if (text === "" && pw !== "" && result !== "") {
-			var decryptedText = CryptoJS.DES.decrypt(result, pw).toString(CryptoJS.enc.Utf8);
-			document.getElementById("text").value = decryptedText;
-		}
+    document.getElementById("result").value = encryptedText;
 
-	}
+  }
 
-	if (cryptotype.value === "3") {
-		if (text !== "" && pw !== "" && result === "") {
-			var encryptedText = CryptoJS.RC4.encrypt(text, pw).toString(); document.getElementById("result").value = encryptedText;
+  if (passwordInput.value !== "" && text.value === "" && result.value !== "") {
 
-		}
+    var decryptedText = CryptoJS.AES.decrypt(result, password).toString(CryptoJS.enc.Utf8);
 
-		if (text === "" && pw !== "" && result !== "") {
-			var decryptedText = CryptoJS.RC4.decrypt(result, pw).toString(CryptoJS.enc.Utf8);
-			document.getElementById("text").value = decryptedText;
-		}
+    document.getElementById("text").value = decryptedText;
 
-	}
+  }
 
 }
 
 
 
-function showpassword() {
-	var x = document.getElementById("password");
-	if (x.type === "password") {
-		x.type = "text";
-	} else {
-		x.type = "password";
-	}
+function showPassword() {
+
+  if (passwordInput.type === "password") {
+
+    passwordInput.type = "text";
+    eye.style.display = "none";
+    eyeOff.style.display = "inline-block";
+
+  } else {
+    passwordInput.type = "password";
+    eyeOff.style.display = "none";
+    eye.style.display = "inline-block";
+  }
+
+  passwordInput.focus();
 
 }
 
-function keeppass() {
-	var password = document.getElementById("password").value;
-	localStorage.setItem("password", password);
+function keepPassword() {
+
+  localStorage.setItem("password", passwordInput.value);
+
 }
-
-
-
-const s = document.getElementById('cryptotype');
-s.addEventListener('change', ()=> {
-	localStorage.setItem('sl', s.value);
-});
-
 
 function share(data) {
-	location.href = "mailto:?body="+encodeURIComponent(data.value);
+
+  location.href = "mailto:?body="+encodeURIComponent(data.value);
+
 }
 
 function copy(data) {
-	var text = data.value;
-	const temp = document.createElement("textarea");
-	temp.innerText = text;
-	document.body.appendChild(temp);
-	temp.select();
-	document.execCommand("copy");
-	document.body.removeChild(temp);
+
+  const temp = document.createElement("textarea");
+  temp.innerText = data;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  document.body.removeChild(temp);
+
 }
 
 function erase(data) {
-	document.getElementById(data).value = "";
+
+  document.getElementById(data).value = "";
+
 }
