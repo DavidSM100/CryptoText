@@ -19,6 +19,7 @@
 
 body {
   background-color: var(--bg-color, #fff);
+  min-height: 40em;
 }
 
 input, textarea {
