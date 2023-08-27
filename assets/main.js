@@ -1,12 +1,23 @@
-const passwordInput = document.getElementById("password");
+// Get Screen height
+var screenHeight = window.innerHeight;
 
-//Load encryption key from localStorage
+// Convert to 95%
+var bodyHeight = screenHeight * 0.95;
+
+// Body height = 95% of screen height
+document.body.style.height = bodyHeight + "px";
+
+
+// Load encryption key from localStorage
+var passwordInput = document.getElementById("password");
+
 var passwordData = localStorage.getItem("password");
 
 if (passwordData) {
   passwordInput.value = passwordData;
 }
 
+// Encrypt/Decrypt
 function encrypt() {
 
   if (passwordInput.value !== "" && text.value !== "" && result.value === "") {
@@ -28,7 +39,7 @@ function encrypt() {
 }
 
 
-
+// Show/Hide password
 function showPassword() {
 
   if (passwordInput.type === "password") {
@@ -47,6 +58,7 @@ function showPassword() {
 
 }
 
+// Save Password
 function keepPassword() {
   if (passwordInput.value === "") {
     localStorage.removeItem("password");
@@ -55,12 +67,14 @@ function keepPassword() {
   }
 }
 
+// Share
 function share(data) {
 
   location.href = "mailto:?body="+encodeURIComponent(data.value);
 
 }
 
+// Copy
 function copy(data) {
 
   const temp = document.createElement("textarea");
@@ -72,6 +86,7 @@ function copy(data) {
 
 }
 
+// Erase
 function erase(data) {
 
   document.getElementById(data).value = "";

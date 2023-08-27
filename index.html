@@ -2,10 +2,7 @@
 <html>
 <head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
   <!--App CSS-->
   <link rel="stylesheet" href="assets/main.css">
 
@@ -18,7 +15,7 @@
 
   <h2>CryptoText</h2>
 
-  <div class="inline">
+  <div id="passwordDiv" class="inline">
 
     <input type="password" id="password" placeholder="Encryption key" oninput="keepPassword()">
 
@@ -37,7 +34,7 @@
 
   <br>
 
-  <div class="inline">
+  <div class="inline texts">
 
     <textarea placeholder="Text" id="text"></textarea>
 
@@ -55,7 +52,7 @@
 
   <br>
 
-  <div class="inline">
+  <div class="inline texts">
 
     <textarea placeholder="Encrypted text" id="result"></textarea>
 
@@ -71,6 +68,7 @@
 
   </div>
 
+  <br>
   <button id="encrypt" onclick="encrypt()">Encrypt/Decrypt</button>
 
   <!--App JS-->

@@ -32,6 +32,7 @@ button:hover, button:focus, button:active {
 /* Basic */
 button, input, textarea {
   background-color: transparent;
+  border-width: 0.2em;
   border-color: orange;
   border-radius: 0.8em;
 }
@@ -41,18 +42,56 @@ h2, button {
 }
 
 button, input {
-  height: 3em;
   text-align: center;
 }
 
-textarea, input {
-  width: 80%;
+button img {
+  width: 90%;
+  height: 90%;
 }
 
-button {
+/* Divs size */
+#passwordDiv {
+  width: 95%;
+  height: 6%;
+}
+
+#passwordDiv div {
+  height: 100%;
+  width: 12%;
+  margin: 1%;
+}
+
+#passwordDiv input {
+  width: 85%;
+  height: 100%;
+}
+
+#passwordDiv button {
   width: 100%;
-  height: 3em;
-  margin: 15%;
+  height: 100%;
+  margin-bottom: 5px;
+}
+
+.texts {
+  width: 95%;
+  height: 25%;
+}
+
+.texts textarea {
+  width: 85%;
+}
+
+.texts div {
+  width: 12%;
+  height: 100%;
+  margin: 1%;
+}
+
+.texts button {
+  width: 100%;
+  height: 30%;
+  margin-bottom: 5px;
 }
 
 /* Specific */
@@ -62,5 +101,5 @@ button {
 
 #encrypt {
   width: 70%;
-  margin: 5%;
+  height: 7%;
 }
