@@ -7,11 +7,9 @@
   <!--App CSS-->
   <link rel="stylesheet" href="assets/main.css">
 
-  <!--Lang JS-->
-  <script src="assets/lang/lang.js"></script>
-
   <!--JS to add back button when using with Delta-Shorcuts-->
   <script src="/assets/ds.js"></script>
+  
 </head>
 
 <body align="middle">
@@ -20,7 +18,7 @@
 
   <div id="passwordDiv" class="inline">
 
-    <input type="password" id="password" oninput="keepPassword()">
+    <input placeholder="Encryption key" type="password" id="password" oninput="keepPassword()">
 
     <div>
 
@@ -39,7 +37,7 @@
 
   <div class="inline texts">
 
-    <textarea id="text"></textarea>
+    <textarea placeholder="Text" id="text"></textarea>
 
     <div class="column">
 
@@ -57,7 +55,7 @@
 
   <div class="inline texts">
 
-    <textarea id="result"></textarea>
+    <textarea placeholder="Encrypted text" id="result"></textarea>
 
     <div class="column">
 
@@ -72,13 +70,14 @@
   </div>
 
   <br>
-  <button id="encrypt" onclick="encrypt()"></button>
+  
+  <button id="encrypt" onclick="encrypt()">Encrypt/Decrypt</button>
 
   <!--App JS-->
   <script src="assets/main.js"></script>
 
   <!--Module to Encrypt/Decrypt-->
-  <script src="assets/aes.js"></script>
+  <script src="assets/aes/aes.js"></script>
 
 </body>
 
