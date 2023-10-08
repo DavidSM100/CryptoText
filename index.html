@@ -7,14 +7,18 @@
   <!--App CSS-->
   <link rel="stylesheet" href="assets/main.css">
 
-  <!--JS to add back button when using with Delta-Shorcuts-->
-  <script src="/assets/ds.js"></script>
-  
 </head>
 
 <body align="middle">
 
   <h2>CryptoText</h2>
+
+  <div id="typeDiv">
+    <button id="textBtn">Text</button>
+    <button id="fileBtn">File</button>
+  </div>
+
+  <br>
 
   <div id="passwordDiv" class="inline">
 
@@ -35,49 +39,68 @@
 
   <br>
 
-  <div class="inline texts">
+  <div id="textDiv">
 
-    <textarea placeholder="Text" id="text"></textarea>
+    <div class="inline texts">
 
-    <div class="column">
+      <textarea placeholder="Text" id="text"></textarea>
 
-      <button onclick="erase('text')"><img src="assets/imgs/x.svg"></button>
+      <div class="column">
 
-      <button onclick="share(text)"><img src="assets/imgs/share.svg"></button>
+        <button onclick="erase('text')"><img src="assets/imgs/x.svg"></button>
 
-      <button onclick="copy(text.value)"><img src="assets/imgs/copy.svg"></button>
+        <button onclick="share(text)"><img src="assets/imgs/share.svg"></button>
+
+        <button onclick="copy(text.value)"><img src="assets/imgs/copy.svg"></button>
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="inline texts">
+
+      <textarea placeholder="Encrypted text" id="result"></textarea>
+
+      <div class="column">
+
+        <button onclick="erase('result')"><img src="assets/imgs/x.svg"></button>
+
+        <button onclick="share(result)"><img src="assets/imgs/share.svg"></button>
+
+        <button onclick="copy(result.value)"><img src="assets/imgs/copy.svg"></button>
+
+      </div>
 
     </div>
 
   </div>
 
-  <br>
-
-  <div class="inline texts">
-
-    <textarea placeholder="Encrypted text" id="result"></textarea>
-
-    <div class="column">
-
-      <button onclick="erase('result')"><img src="assets/imgs/x.svg"></button>
-
-      <button onclick="share(result)"><img src="assets/imgs/share.svg"></button>
-
-      <button onclick="copy(result.value)"><img src="assets/imgs/copy.svg"></button>
+  <div id="fileDiv">
+    <input type="file" id="fileInput">
+    <div>
+      <button id="addFileBtn"><img src="assets/imgs/paperclip.svg">Import file</button>
+    </div>
+    <br>
+    <div id="nameDiv">
 
     </div>
-
   </div>
 
   <br>
-  
-  <button id="encrypt" onclick="encrypt()">Encrypt/Decrypt</button>
+
+  <button id="encrypt" onclick="encrypt_decrypt()">Encrypt/Decrypt</button>
+
 
   <!--App JS-->
   <script src="assets/main.js"></script>
 
   <!--Module to Encrypt/Decrypt-->
   <script src="assets/aes/aes.js"></script>
+
+  <!--WebXDC API-->
+  <script src="webxdc.js"></script>
 
 </body>
 
