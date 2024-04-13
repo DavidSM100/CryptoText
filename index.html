@@ -1,107 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./src/css/main.css" />
 
-  <!--App CSS-->
-  <link rel="stylesheet" href="assets/main.css">
+    <script src="webxdc.js"></script>
+  </head>
 
-</head>
-
-<body align="middle">
-
-  <h2>CryptoText</h2>
-
-  <div id="typeDiv">
-    <button id="textBtn">Text</button>
-    <button id="fileBtn">File</button>
-  </div>
-
-  <br>
-
-  <div id="passwordDiv" class="inline">
-
-    <input placeholder="Encryption key" type="password" id="password" oninput="keepPassword()">
-
-    <div>
-
-      <button onclick="showPassword()">
-
-        <img id="eye" src="assets/imgs/eye.svg">
-        <img id="eyeOff" src="assets/imgs/eye-off.svg">
-
+  <body>
+    <p>
+      <button id="textBtn" class="w45">
+        <img src="./src/assets/imgs/align-left.svg" />
+        Text
       </button>
+      <button id="fileBtn" class="w45">
+        <img src="./src/assets/imgs/file.svg" />
+        File
+      </button>
+    </p>
 
-    </div>
+    <p class="flex" id="passwordDiv">
+      <input placeholder="Password" type="password" id="passwordInput" />
 
-  </div>
+      <button id="passwordBtn">
+        <img id="eyeImg" src="./src/assets/imgs/eye.svg" />
+        <img id="eyeOffImg" src="./src/assets/imgs/eye-off.svg" hidden />
+      </button>
+    </p>
 
-  <br>
+    <div id="textDiv">
+      <div class="flex">
+        <textarea id="textTextarea" placeholder="Text" rows="10"></textarea>
 
-  <div id="textDiv">
+        <p class="flex column">
+          <button id="eraseTextBtn">
+            <img src="./src/assets/imgs/x.svg" />
+          </button>
 
-    <div class="inline texts">
+          <button id="shareTextBtn">
+            <img src="./src/assets/imgs/share.svg" />
+          </button>
 
-      <textarea placeholder="Text" id="text"></textarea>
-
-      <div class="column">
-
-        <button onclick="erase('text')"><img src="assets/imgs/x.svg"></button>
-
-        <button onclick="share(text)"><img src="assets/imgs/share.svg"></button>
-
-        <button onclick="copy(text.value)"><img src="assets/imgs/copy.svg"></button>
-
+          <button id="copyTextBtn">
+            <img src="./src/assets/imgs/copy.svg" />
+          </button>
+        </p>
       </div>
 
-    </div>
+      <p align="middle">
+        <button id="encryptDecryptBtn">
+          <img src="./src/assets/imgs/up-down.svg" />
+          Encrypt/Decrypt
+        </button>
+      </p>
 
-    <br>
+      <div class="flex">
+        <textarea
+          id="resultTextarea"
+          placeholder="Encrypted Text"
+          rows="10"
+        ></textarea>
 
-    <div class="inline texts">
+        <p class="flex column">
+          <button id="eraseResultBtn">
+            <img src="./src/assets/imgs/x.svg" />
+          </button>
 
-      <textarea placeholder="Encrypted text" id="result"></textarea>
+          <button id="shareResultBtn">
+            <img src="./src/assets/imgs/share.svg" />
+          </button>
 
-      <div class="column">
-
-        <button onclick="erase('result')"><img src="assets/imgs/x.svg"></button>
-
-        <button onclick="share(result)"><img src="assets/imgs/share.svg"></button>
-
-        <button onclick="copy(result.value)"><img src="assets/imgs/copy.svg"></button>
-
+          <button id="copyResultBtn">
+            <img src="./src/assets/imgs/copy.svg" />
+          </button>
+        </p>
       </div>
-
     </div>
 
-  </div>
-
-  <div id="fileDiv">
-    <input type="file" id="fileInput">
-    <div>
-      <button id="addFileBtn"><img src="assets/imgs/paperclip.svg">Import file</button>
+    <div id="fileDiv">
+      <button id="encryptFileBtn" class="w45">Encrypt</button>
+      <button id="decryptFileBtn" class="w45">Decrypt</button>
     </div>
-    <br>
-    <div id="nameDiv">
 
-    </div>
-  </div>
-
-  <br>
-
-  <button id="encrypt" onclick="encrypt_decrypt()">Encrypt/Decrypt</button>
-
-
-  <!--App JS-->
-  <script src="assets/main.js"></script>
-
-  <!--Module to Encrypt/Decrypt-->
-  <script src="assets/aes/aes.js"></script>
-
-  <!--WebXDC API-->
-  <script src="webxdc.js"></script>
-
-</body>
-
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
 </html>

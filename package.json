@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "serve": "vite serve",
+    "build": "vite build"
+  },
+	"devDependencies": {
+		"eruda": "^3.0.1",
+		"vite": "^5.2.3",
+		"vite-plugin-html": "^3.2.2",
+		"vite-plugin-zip-pack": "^1.2.2"
+	},
+	"dependencies": {
+		"crypto-js": "^4.2.0"
+	}
+}
