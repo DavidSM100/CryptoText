@@ -1,10 +1,10 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./src/css/main.css" />
+    <link rel="stylesheet" href="src/css/main.css" />
 
     <script src="webxdc.js"></script>
   </head>
@@ -12,21 +12,21 @@
   <body>
     <p>
       <button id="textBtn" class="w45">
-        <img src="./src/assets/imgs/align-left.svg" />
+        <img src="src/imgs/align-left.svg" />
         Text
       </button>
       <button id="fileBtn" class="w45">
-        <img src="./src/assets/imgs/file.svg" />
+        <img src="src/imgs/file.svg" />
         File
       </button>
     </p>
 
-    <p class="flex" id="passwordDiv">
+    <p id="passwordDiv">
       <input placeholder="Password" type="password" id="passwordInput" />
 
       <button id="passwordBtn">
-        <img id="eyeImg" src="./src/assets/imgs/eye.svg" />
-        <img id="eyeOffImg" src="./src/assets/imgs/eye-off.svg" hidden />
+        <img id="eyeImg" src="src/imgs/eye.svg" />
+        <img id="eyeOffImg" src="src/imgs/eye-off.svg" hidden />
       </button>
     </p>
 
@@ -36,22 +36,22 @@
 
         <p class="flex column">
           <button id="eraseTextBtn">
-            <img src="./src/assets/imgs/x.svg" />
+            <img src="src/imgs/x.svg" />
           </button>
 
           <button id="shareTextBtn">
-            <img src="./src/assets/imgs/share.svg" />
+            <img src="src/imgs/share.svg" />
           </button>
 
           <button id="copyTextBtn">
-            <img src="./src/assets/imgs/copy.svg" />
+            <img src="src/imgs/copy.svg" />
           </button>
         </p>
       </div>
 
-      <p align="middle">
+      <p class="center">
         <button id="encryptDecryptBtn">
-          <img src="./src/assets/imgs/up-down.svg" />
+          <img src="src/imgs/up-down.svg" />
           Encrypt/Decrypt
         </button>
       </p>
@@ -65,15 +65,15 @@
 
         <p class="flex column">
           <button id="eraseResultBtn">
-            <img src="./src/assets/imgs/x.svg" />
+            <img src="src/imgs/x.svg" />
           </button>
 
           <button id="shareResultBtn">
-            <img src="./src/assets/imgs/share.svg" />
+            <img src="src/imgs/share.svg" />
           </button>
 
           <button id="copyResultBtn">
-            <img src="./src/assets/imgs/copy.svg" />
+            <img src="src/imgs/copy.svg" />
           </button>
         </p>
       </div>
@@ -84,6 +84,6 @@
       <button id="decryptFileBtn" class="w45">Decrypt</button>
     </div>
 
-    <script type="module" src="./src/js/main.js"></script>
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>

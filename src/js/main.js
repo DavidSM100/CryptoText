@@ -1,12 +1,12 @@
 import aes from "crypto-js/aes.js";
 import utf8 from "crypto-js/enc-utf8.js";
 
-let xdc = window.webxdc;
+const $ = (id) => document.getElementById(id);
 
-let textBtn = document.getElementById("textBtn");
-let fileBtn = document.getElementById("fileBtn");
-textBtn.addEventListener("click", showTextDiv);
-fileBtn.addEventListener("click", showFileDiv);
+const textBtn = $("textBtn");
+const fileBtn = $("fileBtn");
+textBtn.onclick = showTextDiv;
+fileBtn.onclick = showFileDiv;
 
 showTextDiv();
 
@@ -28,23 +28,21 @@ function showFileDiv() {
   fileBtn.style.color = "orange";
 }
 
-let passwordInput = document.getElementById("passwordInput");
+const passwordInput = $("passwordInput");
 
 loadSavedPassword();
 
 function loadSavedPassword() {
-  let savedPassword = localStorage.getItem("password");
-  if (savedPassword) {
-    passwordInput.value = savedPassword;
-  }
+  const savedPassword = localStorage.getItem("password");
+  passwordInput.value = savedPassword;
 }
 
-let passwordBtn = document.getElementById("passwordBtn");
-passwordBtn.addEventListener("click", togglePassword);
+const passwordBtn = $("passwordBtn");
+passwordBtn.onclick = togglePassword;
 
 function togglePassword() {
-  let eyeImg = document.getElementById("eyeImg");
-  let eyeOffImg = document.getElementById("eyeOffImg");
+  const eyeImg = $("eyeImg");
+  const eyeOffImg = $("eyeOffImg");
 
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -59,13 +57,11 @@ function togglePassword() {
   passwordInput.focus();
 }
 
-passwordInput.addEventListener("input", savePassword);
+passwordInput.oninput = savePassword;
 
 function savePassword() {
-  let password = passwordInput.value;
-  if (password) {
-    localStorage.setItem("password", password);
-  }
+  const password = passwordInput.value;
+  localStorage.setItem("password", password);
 }
 
 const CryptoJS = {
@@ -75,91 +71,96 @@ const CryptoJS = {
   },
 };
 
-let encryptDecryptBtn = document.getElementById("encryptDecryptBtn");
-encryptDecryptBtn.addEventListener("click", encryptDecryptText);
+const encryptDecryptBtn = $("encryptDecryptBtn");
+encryptDecryptBtn.onclick = encryptDecryptText;
 
-let textTextarea = document.getElementById("textTextarea");
-let resultTextarea = document.getElementById("resultTextarea");
+const textTextarea = $("textTextarea");
+const resultTextarea = $("resultTextarea");
 
 function encryptDecryptText() {
-  let textData = textTextarea.value;
-  let resultData = resultTextarea.value;
-  let password = passwordInput.value;
+  const password = passwordInput.value;
+  if (!password) return;
 
-  if (password) {
-    if (textData && !resultData) {
-      resultTextarea.value = encrypt(textData, password);
-    }
+  const textData = textTextarea.value;
+  const resultData = resultTextarea.value;
 
-    if (!textData && resultData) {
-      textTextarea.value = decrypt(resultData, password);
-    }
+  if (textData && !resultData) {
+    resultTextarea.value = encrypt(textData, password);
+  }
+
+  if (!textData && resultData) {
+    textTextarea.value = decrypt(resultData, password);
   }
 }
 
-let encryptFileBtn = document.getElementById("encryptFileBtn");
-let decryptFileBtn = document.getElementById("decryptFileBtn");
-encryptFileBtn.addEventListener("click", encryptFile);
+const encryptFileBtn = $("encryptFileBtn");
+const decryptFileBtn = $("decryptFileBtn");
+encryptFileBtn.onclick = encryptFile;
+decryptFileBtn.onclick = decryptFile;
 
-decryptFileBtn.addEventListener("click", decryptFile);
+const readFileAs = (type, file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    if (type === "base64") reader.readAsDataURL(file);
+    if (type === "text") reader.readAsText(file);
+    reader.onload = () => {
+      let result = reader.result;
+      if (type === "base64") result = result.split(",")[1];
+      resolve(result);
+    };
+    reader.onerror = reject;
+  });
 
 async function encryptFile() {
-  let password = passwordInput.value;
+  const password = passwordInput.value;
   if (password) {
-    let file = (await xdc.importFiles({}))[0];
-    let fileName = file.name;
+    const file = (await window.webxdc.importFiles({}))[0];
+    if (!file) return;
 
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (event) => {
-      let dataUrl = event.target.result;
-      let base64 = dataUrl.split(",")[1];
+    const fileName = file.name;
 
-      let encryptedBase64 = encrypt(base64, password);
-      try {
-        xdc.sendToChat({
-          file: {
-            name: fileName,
-            plainText: encryptedBase64,
-          },
-        });
-      } catch (err) {
-        console.log(err);
-        alert(err);
-      }
-    };
+    try {
+      const base64 = await readFileAs("base64", file);
+      const encryptedBase64 = encrypt(base64, password);
+      window.webxdc.sendToChat({
+        file: {
+          name: fileName,
+          plainText: encryptedBase64,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
   }
 }
 
 async function decryptFile() {
-  let password = passwordInput.value;
+  const password = passwordInput.value;
   if (password) {
-    let file = (await xdc.importFiles({}))[0];
-    let fileName = file.name;
+    const file = (await window.webxdc.importFiles({}))[0];
+    if (!file) return;
 
-    let reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = (event) => {
-      let encryptedText = event.target.result;
-      let base64 = decrypt(encryptedText, password);
-      try {
-        xdc.sendToChat({
-          file: {
-            name: fileName,
-            base64: base64,
-          },
-        });
-      } catch (err) {
-        console.log(err);
-        alert(err);
-      }
-    };
+    const fileName = file.name;
+    try {
+      const encryptedText = await readFileAs("text", file);
+      const base64 = decrypt(encryptedText, password);
+      window.webxdc.sendToChat({
+        file: {
+          name: fileName,
+          base64: base64,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
   }
 }
 
 function encrypt(text, password) {
   try {
-    let encryptedText = CryptoJS.AES.encrypt(text, password).toString();
+    const encryptedText = CryptoJS.AES.encrypt(text, password).toString();
     return encryptedText;
   } catch (err) {
     console.log(err);
@@ -169,37 +170,33 @@ function encrypt(text, password) {
 
 function decrypt(encryptedText, password) {
   try {
-    let decryptedText = CryptoJS.AES.decrypt(encryptedText, password).toString(
-      CryptoJS.enc.Utf8,
-    );
-    if (decryptedText) return decryptedText;
+    const decryptedText = CryptoJS.AES.decrypt(encryptedText, password);
+    if (decryptedText) return decryptedText.toString(CryptoJS.enc.Utf8);
   } catch (err) {
     console.log(err);
     alert(err);
   }
 }
 
-let eraseTextBtn = document.getElementById("eraseTextBtn");
-let eraseResultBtn = document.getElementById("eraseResultBtn");
-eraseTextBtn.addEventListener("click", () => eraseValue(textTextarea));
-eraseResultBtn.addEventListener("click", () => eraseValue(resultTextarea));
+const eraseTextBtn = $("eraseTextBtn");
+const eraseResultBtn = $("eraseResultBtn");
+eraseTextBtn.onclick = () => eraseValue(textTextarea);
+eraseResultBtn.onclick = () => eraseValue(resultTextarea);
 
-let copyTextBtn = document.getElementById("copyTextBtn");
-let copyResultBtn = document.getElementById("copyResultBtn");
-copyTextBtn.addEventListener("click", () => copy(textTextarea.value));
-copyResultBtn.addEventListener("click", () => copy(resultTextarea.value));
+const shareTextBtn = $("shareTextBtn");
+const shareResultBtn = $("shareResultBtn");
+shareTextBtn.onclick = () => shareText(textTextarea.value);
+shareResultBtn.onclick = () => shareText(resultTextarea.value);
 
-let shareTextBtn = document.getElementById("shareTextBtn");
-let shareResultBtn = document.getElementById("shareResultBtn");
-shareTextBtn.addEventListener("click", () => shareText(textTextarea.value));
-shareResultBtn.addEventListener("click", () => shareText(resultTextarea.value));
+const copyTextBtn = $("copyTextBtn");
+const copyResultBtn = $("copyResultBtn");
+copyTextBtn.onclick = () => copy(textTextarea.value);
+copyResultBtn.onclick = () => copy(resultTextarea.value);
 
-function eraseValue(elem) {
-  elem.value = "";
-}
+const eraseValue = (elem) => (elem.value = "");
 
 function shareText(text) {
-  if (text) xdc.sendToChat({ text: text });
+  if (text) window.webxdc.sendToChat({ text: text });
 }
 
 function copy(text) {

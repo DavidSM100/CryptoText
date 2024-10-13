@@ -1,5 +1,5 @@
 # CryptoText
 
-Webxdc to encrypt/decrypt text and files, it's made to use with Delta Chat
+[webxdc](webxdc.org) to encrypt/decrypt text and files.
 
-Just open with Delta and set an encryption key, then you can encrypt/decrypt text and files whenever you want.
+Just open with and set a password, then you can encrypt/decrypt text and files whenever you want.
