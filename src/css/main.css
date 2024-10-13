@@ -25,6 +25,10 @@ textarea {
   caret-color: orange;
 }
 
+textarea {
+  resize: none;
+}
+
 button,
 input {
   height: 35px;
@@ -51,6 +55,10 @@ textarea {
   border-radius: 5px;
   background-color: transparent;
   border: 2px solid orange;
+}
+
+.center {
+  text-align: center;
 }
 
 .flex {
